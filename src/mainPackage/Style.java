@@ -30,6 +30,8 @@ public class Style {
 	public Color blue = Color.decode("#039BE5");
 	public Color green = Color.decode("#26A69A");
 	public Color red = Color.decode("#C62828");
+	Color yell = Color.decode("#FFEA00");
+	Color black = Color.decode("#424242");
 	public void btnPointer(JButton btn) {
 		btn.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 		new ImageIcon("views/cursor.png").getImage(),
