@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class Medios extends JFrame implements ActionListener {
 
@@ -72,15 +76,32 @@ public class Medios extends JFrame implements ActionListener {
 		btnIniciar = new MdButton(s.yell,s.black,"Iniciar");
 		btnIniciar.setBounds(23,300,274,39);
 		pnEntradas.add(btnIniciar);
+		btnIniciar.addActionListener(this);
+		
 		//Panel de salidas
 		spSalida = new JScrollPane();
-		spSalida.setBounds(337, 105, 655, 530);
+		spSalida.setBounds(345, 174, 613, 396);
 		mainPanel.add(spSalida);
 		spSalida.getViewport().setBackground(s.black);
-		spSalida.setOpaque(true);
-
+		spSalida.setBorder(BorderFactory.createEmptyBorder(0,0, 0, 0));
+		
 		table = new JTable();
+		table.setForeground(s.yell);
+		table.setShowHorizontalLines(false);
+		table.setBorder(null);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Iniciales", "Cuadrado", "Cuadrados Medios", "Normalizado"
+			}
+		));
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+		dtcr.setHorizontalTextPosition(DefaultTableCellRenderer.CENTER);
+		
 		spSalida.setViewportView(table);
+		
+		s.mdTable(table, s.black, s.yell);
 		
 	}
 	
@@ -88,24 +109,40 @@ public class Medios extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnIniciar) {
-			
+			cuadradosMedios();
 		}
 		
 	}
 	
 	
 	public void cuadradosMedios() {
+		DefaultTableModel mod = (DefaultTableModel) table.getModel();
+		mod.setRowCount(0);
 		int iniciales = Integer.parseInt(txtIniciales.getText());
+		
 		int tamañoInicial = txtIniciales.getText().length();
+		
 		for(int i = 0; i<=10;i++) {
+			int inicialStatic = iniciales;
 			long alCuadrado = (long)Math.pow(iniciales, 2);
+			String strCuadrado = Long.toString(alCuadrado);
 			int tamañoCuadrado = String.valueOf(alCuadrado).length();
 			int primerCaracter = (tamañoCuadrado - tamañoInicial) /2;
-			String snum3 = 
+			//String snum3 = strCuadrado.substring(primerCaracter,primerCaracter+tamañoCuadrado);
+			String snum3 = strCuadrado.substring(primerCaracter,primerCaracter+4);
+			iniciales = Integer.parseInt(snum3);
+			
+			float normalizados = (float) iniciales /10000;
+			mod.addRow(new Object[] {
+				inicialStatic,alCuadrado,iniciales,normalizados
+			});
+	
 			
 		}
+		table.setModel(mod);
 	}
 	
+
 	
 	
 }
