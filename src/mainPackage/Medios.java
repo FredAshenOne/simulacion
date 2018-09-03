@@ -34,6 +34,8 @@ public class Medios extends JFrame implements ActionListener {
 	private JTable table;
 	private JPanel pnEntradas;
 	MdTextField txtIniciales;
+	JLabel lblWarning;
+	String snum3; 
 	
 	public Medios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,8 +77,16 @@ public class Medios extends JFrame implements ActionListener {
 		
 		btnIniciar = new MdButton(s.yell,s.black,"Iniciar");
 		btnIniciar.setBounds(23,300,274,39);
-		pnEntradas.add(btnIniciar);
+		pnEntradas.add(btnIniciar);	
 		btnIniciar.addActionListener(this);
+		
+		lblWarning = new JLabel("");
+		lblWarning.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWarning.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 15));
+		lblWarning.setBounds(23, 467, 274, 27);
+		lblWarning.setForeground(s.yell);
+		pnEntradas.add(lblWarning);
+		
 		
 		//Panel de salidas
 		spSalida = new JScrollPane();
@@ -97,8 +107,7 @@ public class Medios extends JFrame implements ActionListener {
 			}
 		));
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-		dtcr.setHorizontalTextPosition(DefaultTableCellRenderer.CENTER);
-		
+		dtcr.setHorizontalTextPosition(DefaultTableCellRenderer.CENTER);		
 		spSalida.setViewportView(table);
 		
 		s.mdTable(table, s.black, s.yell);
@@ -118,31 +127,43 @@ public class Medios extends JFrame implements ActionListener {
 	public void cuadradosMedios() {
 		DefaultTableModel mod = (DefaultTableModel) table.getModel();
 		mod.setRowCount(0);
-		int iniciales = Integer.parseInt(txtIniciales.getText());
-		
-		int tamañoInicial = txtIniciales.getText().length();
-		
-		for(int i = 0; i<=10;i++) {
-			int inicialStatic = iniciales;
-			long alCuadrado = (long)Math.pow(iniciales, 2);
-			String strCuadrado = Long.toString(alCuadrado);
-			int tamañoCuadrado = String.valueOf(alCuadrado).length();
-			int primerCaracter = (tamañoCuadrado - tamañoInicial) /2;
-			//String snum3 = strCuadrado.substring(primerCaracter,primerCaracter+tamañoCuadrado);
-			String snum3 = strCuadrado.substring(primerCaracter,primerCaracter+4);
-			iniciales = Integer.parseInt(snum3);
+		if(s.isNumeric(txtIniciales.getText())) {
 			
-			float normalizados = (float) iniciales /10000;
-			mod.addRow(new Object[] {
-				inicialStatic,alCuadrado,iniciales,normalizados
-			});
-	
+			int iniciales = Integer.parseInt(txtIniciales.getText());
+			int tamañoInicial = txtIniciales.getText().length();
 			
+			for(int i = 0; i<=10;i++) {
+				int inicialStatic = iniciales;
+				long alCuadrado = (long)Math.pow(iniciales, 2);
+				String strCuadrado = Long.toString(alCuadrado);
+				int tamañoCuadrado = String.valueOf(alCuadrado).length();
+				int primerCaracter = (tamañoCuadrado - tamañoInicial) /2;
+				
+				if(tamañoCuadrado >= 4) {
+					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+4);	
+				}else if(tamañoCuadrado == 3){
+					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+3);
+				}else if(tamañoCuadrado == 2){
+					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+2);
+					
+				}else if(tamañoCuadrado == 1){
+					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+1);
+					
+				}
+				
+				iniciales = Integer.parseInt(snum3);
+				
+				float normalizados = (float) iniciales /10000;
+				mod.addRow(new Object[] {
+					inicialStatic,alCuadrado,iniciales,normalizados
+				});
+				lblWarning.setText("");
+				
+			}
+			
+		}else {
+			lblWarning.setText("El valor ingresado no es valido");
 		}
 		table.setModel(mod);
 	}
-	
-
-	
-	
 }
