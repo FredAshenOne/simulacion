@@ -65,15 +65,15 @@ public class MainMenu extends JFrame implements ActionListener{
 		pbInventarios.setBounds(213, 203, 155, 180);
 		mainPanel.add(pbInventarios);
 		
-		pbInversion = new PaneButton("Inventarios", "views/profits.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbInversion = new PaneButton("Inversion", "views/profits.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbInversion.setBounds(408, 203, 155, 180);
 		mainPanel.add(pbInversion);
 		
-		pbEconomicos = new PaneButton("Inventarios", "views/wallet.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbEconomicos = new PaneButton("Economicos", "views/wallet.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbEconomicos.setBounds(601, 203, 155, 180);
 		mainPanel.add(pbEconomicos);
 		
-		pbEstados = new PaneButton("Inventarios", "views/budget.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbEstados = new PaneButton("Financieros", "views/budget.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbEstados.setBounds(800, 203, 155, 180);
 		mainPanel.add(pbEstados);
 		
