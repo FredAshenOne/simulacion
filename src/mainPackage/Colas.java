@@ -98,9 +98,9 @@ public class Colas extends JFrame {
 	
 		
 	}
-	
-	public void agregarFifo(String nombre) {
-		Elementos e = new Elementos(txtNombre.getText());
-	}
+//	
+//	public void agregarFifo(String nombre) {
+//		Elementos e = new Elementos(txtNombre.getText());
+//	}
 	
 }
