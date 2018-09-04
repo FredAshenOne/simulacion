@@ -19,7 +19,7 @@ public class MainMenu extends JFrame implements ActionListener{
 	Style s = new Style();
 	Colas c = new Colas();
 	Medios m = new Medios();	
-			
+	Inventarios inv = new Inventarios();
 			
 	MdHeader pnHeader;
 	PaneButton pbInventarios,pbEconomicos,pbEstados,pbColas,pbInversion,pbMedios;
@@ -39,7 +39,7 @@ public class MainMenu extends JFrame implements ActionListener{
 		s.mdPanel(mainPanel, s.black);
 		
 		//Header
-		pnHeader = new MdHeader(s.yell,s.black);
+		pnHeader = new MdHeader(s.yell,s.black); 
 		pnHeader.setBounds(0, 0, 992, 104);
 		pnHeader.btnBack.setVisible(false);
 		pnHeader.btnNext.setVisible(false);
@@ -64,6 +64,8 @@ public class MainMenu extends JFrame implements ActionListener{
 		pbInventarios = new PaneButton("Inventarios", "views/storage.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbInventarios.setBounds(213, 203, 155, 180);
 		mainPanel.add(pbInventarios);
+		pbInventarios.btn.addActionListener(this);
+		inv.pnHeader.btnBack.addActionListener(this);
 		
 		pbInversion = new PaneButton("Inversion", "views/profits.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbInversion.setBounds(408, 203, 155, 180);
@@ -95,12 +97,23 @@ public class MainMenu extends JFrame implements ActionListener{
 		}else if(e.getSource() == c.pnHeader.btnBack) {
 			this.setVisible(true);
 			c.setVisible(false);
+			c.cola.clear();
+			c.scrollPane.setVisible(false);
 		}else if(e.getSource() == pbMedios.btn) {
 				m.setVisible(true);
 				this.setVisible(false);
 		}else if(e.getSource() == m.pnHeader.btnBack) {
 			this.setVisible(true);
 			m.setVisible(false);
+			
+		}else if(e.getSource() == pbInventarios.btn) {
+			inv.setVisible(true);
+			this.setVisible(false);
+			inv.llenarProductos();
+			inv.llenarRecibos();
+		}else if(e.getSource() == inv.pnHeader.btnBack) {
+			this.setVisible(true);
+			inv.setVisible(false);
 		}
 		
 	}
