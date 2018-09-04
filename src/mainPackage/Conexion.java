@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Conexion {
-	public String url = "jdbc:mysql://localhost:3306/", db = "simulacion" ,usuario = "root", password = "";
+	public String url = "jdbc:mysql://localhost:3306/", db = "simulacion" ,usuario = "root", password = "1234";
 	
 	
 	public ResultSet query(String sentence) {

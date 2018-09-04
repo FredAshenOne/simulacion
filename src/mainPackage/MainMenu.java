@@ -18,11 +18,12 @@ public class MainMenu extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	Style s = new Style();
 	Colas c = new Colas();
-	Medios m = new Medios();	
+	Medios m = new Medios();
+	ProductosMedios pmed = new ProductosMedios();
 	Inventarios inv = new Inventarios();
 			
 	MdHeader pnHeader;
-	PaneButton pbInventarios,pbEconomicos,pbEstados,pbColas,pbInversion,pbMedios;
+	PaneButton pbInventarios,pbEconomicos,pbEstados,pbColas,pbInversion,pbMedios,pbProdMedios;
 	private JLabel label;
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +34,7 @@ public class MainMenu extends JFrame implements ActionListener{
 		contentPane.setLayout(null);
 		
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBounds(0, 0, 1002, 657);
+		mainPanel.setBounds(-54, 11, 1002, 657);
 		contentPane.add(mainPanel);
 		mainPanel.setLayout(null);
 		s.mdPanel(mainPanel, s.black);
@@ -85,8 +86,12 @@ public class MainMenu extends JFrame implements ActionListener{
 		mainPanel.add(pbMedios);
 		pbMedios.btn.addActionListener(this);
 		m.pnHeader.btnBack.addActionListener(this);
-		
-		
+		//productos medios
+		pbProdMedios = new PaneButton("Productos Medios", "views/square.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbProdMedios.setBounds(213, 424, 155, 180);
+		mainPanel.add(pbProdMedios);
+		pbProdMedios.btn.addActionListener(this);
+		pmed.pnHeader.btnBack.addActionListener(this);
 		
 	}
 	@Override
@@ -114,6 +119,9 @@ public class MainMenu extends JFrame implements ActionListener{
 		}else if(e.getSource() == inv.pnHeader.btnBack) {
 			this.setVisible(true);
 			inv.setVisible(false);
+		}else if(e.getSource() == pbProdMedios.btn) {
+			pmed.setVisible(true);
+			this.setVisible(false);
 		}
 		
 	}

@@ -53,7 +53,7 @@ public class Inventarios extends JFrame implements ActionListener {
 		//Header
 		pnHeader = new MdHeader(s.yell,s.black);
 		pnHeader.setBounds(0, 0, 992, 104);
-		pnHeader.lblTitle.setText("Cuadrados Medios");
+		pnHeader.lblTitle.setText("Inventarios");
 		pnHeader.lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		pnHeader.lblTitle.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 30));
 		mainPanel.add(pnHeader);
@@ -111,13 +111,13 @@ public class Inventarios extends JFrame implements ActionListener {
 		btnMinus.setBounds(32, 136, 64, 64);
 		pnVentas.add(btnMinus);
 		btnMinus.addActionListener(this);
-		s.btnIcon(btnMinus, "views/lessYell.png");
+		s.btnIcon(btnMinus, "views/substract.png");
 		
 		btnPlus = new JButton("");
 		btnPlus.setBounds(133, 136, 64, 64);
 		pnVentas.add(btnPlus);
 		btnPlus.addActionListener(this);
-		s.btnIcon(btnPlus, "views/plusYell.png");
+		s.btnIcon(btnPlus, "views/add.png");
 		
 		btnVender = new MdButton(s.yell,s.black, "Vender");
 		btnVender.setFont(new Font("Yu Gothic Light", Font.PLAIN, 14));
@@ -175,7 +175,7 @@ public class Inventarios extends JFrame implements ActionListener {
 		btnMenos.setBounds(31, 133, 64, 64);
 		pnResurtido.add(btnMenos);
 		btnMenos.addActionListener(this);
-		s.btnIcon(btnMenos, "views/lessYell.png");
+		s.btnIcon(btnMenos, "views/substract.png");
 		
 		lblCantidadRes = new JLabel(String.valueOf(cantidadRes));
 		lblCantidadRes.setHorizontalAlignment(SwingConstants.CENTER);
@@ -188,7 +188,7 @@ public class Inventarios extends JFrame implements ActionListener {
 		btnMas.setBounds(132, 133, 64, 64);
 		pnResurtido.add(btnMas);
 		btnMas.addActionListener(this);
-		s.btnIcon(btnMas, "views/plusYell.png");
+		s.btnIcon(btnMas, "views/add.png");
 		
 		btnResurtir = new MdButton(s.yell,s.black,"Resurtir");
 		btnResurtir.setFont(new Font("Yu Gothic Light", Font.PLAIN, 14));
