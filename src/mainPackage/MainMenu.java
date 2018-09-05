@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -122,6 +123,14 @@ public class MainMenu extends JFrame implements ActionListener{
 		}else if(e.getSource() == pbProdMedios.btn) {
 			pmed.setVisible(true);
 			this.setVisible(false);
+		}else if(e.getSource() == pmed.pnHeader.btnBack) {
+			this.setVisible(true);
+			pmed.setVisible(false);
+			DefaultTableModel mod = (DefaultTableModel) pmed.table.getModel();
+			mod.setRowCount(0);
+			pmed.table.setModel(mod);
+			pmed.txtInicialesA.setText("");
+			pmed.txtInicialesB.setText("");
 		}
 		
 	}

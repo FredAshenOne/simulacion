@@ -31,7 +31,7 @@ public class ProductosMedios extends JFrame implements ActionListener {
 	MdButton btnIniciar;
 	private JLabel label;
 	private JScrollPane spSalida;
-	private JTable table;
+	JTable table;
 	private JPanel pnEntradas;
 	MdTextField txtInicialesA,txtInicialesB;
 	JLabel lblWarning;
@@ -107,7 +107,7 @@ public class ProductosMedios extends JFrame implements ActionListener {
 			new Object[][] {
 			},
 			new String[] {
-				"A","B","Producto", "Cuadrado", "Cuadrados Medios", "Normalizado"
+				"A","B","Producto","Producto Medio", "Normalizado"
 			}
 		));
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
@@ -134,39 +134,39 @@ public class ProductosMedios extends JFrame implements ActionListener {
 		if(s.isNumeric(txtInicialesA.getText()) && s.isNumeric(txtInicialesB.getText())) {
 			int numeroA = Integer.parseInt(txtInicialesA.getText());
 			int numeroB = Integer.parseInt(txtInicialesB.getText());
-			int iniciales = Integer.parseInt(txtInicialesA.getText()) * Integer.parseInt(txtInicialesA.getText()) ;
-			int tamañoInicial = String.valueOf(iniciales).length();
+			int iniciales = numeroA*numeroB;
+			String ceros = "";
+			String staticIniciales = "";
 			
 			for(int i = 0; i<=10;i++) {
-				int inicialStatic = iniciales;
-				long alCuadrado = (long)Math.pow(iniciales, 2);
-				String strCuadrado = Long.toString(alCuadrado);
-				int tamañoCuadrado = String.valueOf(alCuadrado).length();
-				int primerCaracter = (tamañoCuadrado - tamañoInicial) /2;
+				int tamañoInicial = String.valueOf(iniciales).length();
 				
-				if(tamañoCuadrado >= 4) {
-					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+4);	
-				}else if(tamañoCuadrado == 3){
-					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+3);
-				}else if(tamañoCuadrado == 2){
-					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+2);
-					
-				}else if(tamañoCuadrado == 1){
-					snum3 = strCuadrado.substring(primerCaracter,primerCaracter+1);
-					
+				if(tamañoInicial>5) {
+					snum3 = String.valueOf(iniciales).substring(1,3);
+					staticIniciales = String.valueOf(iniciales);
+				}else if(tamañoInicial == 5){
+					snum3 = String.valueOf(iniciales).substring(1,3);
+					staticIniciales = String.valueOf(iniciales);
+				}else if(tamañoInicial == 4 ){					
+					snum3 = String.valueOf(iniciales).substring(1,3);
+					staticIniciales = String.valueOf(iniciales);
+				}else if(tamañoInicial <= 3){
+					ceros = String.format("%04d", iniciales);
+					snum3 = ceros.substring(1,3);
+					staticIniciales = ceros;
 				}
 				
-				float normalizados = (float) iniciales /10000;
-				int norm = iniciales/10;
+				
+				
+				float normalizados = Float.parseFloat(snum3) /100;
 				
 				iniciales = Integer.parseInt(snum3);
 				mod.addRow(new Object[] {
-					numeroA,numeroB,inicialStatic,alCuadrado,iniciales,normalizados
+					numeroA,numeroB,staticIniciales,snum3,normalizados
 				});
 				lblWarning.setText("");
 				numeroA = numeroB;
-				numeroB = norm;
-				System.out.println(norm);
+				numeroB = Integer.parseInt(snum3);
 				iniciales = numeroA * numeroB;
 			}
 			
