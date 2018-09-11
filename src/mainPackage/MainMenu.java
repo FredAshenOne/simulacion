@@ -22,9 +22,9 @@ public class MainMenu extends JFrame implements ActionListener{
 	Medios m = new Medios();
 	ProductosMedios pmed = new ProductosMedios();
 	Inventarios inv = new Inventarios();
-			
+	Aditivo ad = new Aditivo();
 	MdHeader pnHeader;
-	PaneButton pbInventarios,pbEconomicos,pbEstados,pbColas,pbInversion,pbMedios,pbProdMedios;
+	PaneButton pbInventarios,pbEconomicos,pbEstados,pbColas,pbInversion,pbMedios,pbProdMedios,pbAditivo;
 	private JLabel label;
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +35,7 @@ public class MainMenu extends JFrame implements ActionListener{
 		contentPane.setLayout(null);
 		
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBounds(-54, 11, 1002, 657);
+		mainPanel.setBounds(0, 11, 1002, 657);
 		contentPane.add(mainPanel);
 		mainPanel.setLayout(null);
 		s.mdPanel(mainPanel, s.black);
@@ -88,12 +88,18 @@ public class MainMenu extends JFrame implements ActionListener{
 		pbMedios.btn.addActionListener(this);
 		m.pnHeader.btnBack.addActionListener(this);
 		//productos medios
-		pbProdMedios = new PaneButton("Productos Medios", "views/square.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbProdMedios = new PaneButton("Productos Medios", "views/division.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbProdMedios.setBounds(213, 424, 155, 180);
 		mainPanel.add(pbProdMedios);
 		pbProdMedios.btn.addActionListener(this);
 		pmed.pnHeader.btnBack.addActionListener(this);
-		
+		//Congruencial aditivo
+		pbAditivo = new PaneButton("Congruencial Aditivo", "views/suma.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbAditivo.setBounds(408, 424, 155, 180);
+		mainPanel.add(pbAditivo);
+		pbAditivo.btn.addActionListener(this);
+		ad.pnHeader.btnBack.addActionListener(this);
+	
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -131,6 +137,12 @@ public class MainMenu extends JFrame implements ActionListener{
 			pmed.table.setModel(mod);
 			pmed.txtInicialesA.setText("");
 			pmed.txtInicialesB.setText("");
+		}else if(e.getSource() == ad.pnHeader.btnBack ) {
+			this.setVisible(true);
+			ad.setVisible(false);
+		}else if(e.getSource() == pbAditivo.btn) {
+			ad.setVisible(true);
+			this.setVisible(false);
 		}
 		
 	}
