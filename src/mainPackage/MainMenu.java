@@ -23,8 +23,10 @@ public class MainMenu extends JFrame implements ActionListener{
 	ProductosMedios pmed = new ProductosMedios();
 	Inventarios inv = new Inventarios();
 	Aditivo ad = new Aditivo();
+	SecondMenu sm = new SecondMenu();
+	
 	MdHeader pnHeader;
-	PaneButton pbInventarios,pbEconomicos,pbEstados,pbColas,pbInversion,pbMedios,pbProdMedios,pbAditivo;
+	PaneButton pbInventarios,pbEconomicos,pbEstados,pbColas,pbInversion,pbMedios,pbProdMedios,pbAditivo,pbMulti,pbMixto;
 	private JLabel label;
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,11 +46,11 @@ public class MainMenu extends JFrame implements ActionListener{
 		pnHeader = new MdHeader(s.yell,s.black); 
 		pnHeader.setBounds(0, 0, 992, 104);
 		pnHeader.btnBack.setVisible(false);
-		pnHeader.btnNext.setVisible(false);
 		pnHeader.lblTitle.setText("Simulación");
 		pnHeader.lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		pnHeader.lblTitle.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 30));
 		mainPanel.add(pnHeader);
+		pnHeader.btnNext.addActionListener(this);
 		//Opciones Menus
 		
 		
@@ -62,21 +64,24 @@ public class MainMenu extends JFrame implements ActionListener{
 		pbColas.btn.addActionListener(this);
 		
 		
-		
+		//Inventarios
 		pbInventarios = new PaneButton("Inventarios", "views/storage.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbInventarios.setBounds(213, 203, 155, 180);
 		mainPanel.add(pbInventarios);
 		pbInventarios.btn.addActionListener(this);
 		inv.pnHeader.btnBack.addActionListener(this);
 		
+		//Inversion
 		pbInversion = new PaneButton("Inversion", "views/profits.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbInversion.setBounds(408, 203, 155, 180);
 		mainPanel.add(pbInversion);
 		
+		//Economicos
 		pbEconomicos = new PaneButton("Economicos", "views/wallet.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbEconomicos.setBounds(601, 203, 155, 180);
-		mainPanel.add(pbEconomicos);
+		mainPanel.add(pbEconomicos);		
 		
+		//Estados
 		pbEstados = new PaneButton("Financieros", "views/budget.png", new Color(255, 234, 0), new Color(66, 66, 66));
 		pbEstados.setBounds(800, 203, 155, 180);
 		mainPanel.add(pbEstados);
@@ -99,11 +104,31 @@ public class MainMenu extends JFrame implements ActionListener{
 		mainPanel.add(pbAditivo);
 		pbAditivo.btn.addActionListener(this);
 		ad.pnHeader.btnBack.addActionListener(this);
-	
+		
+		//congruencial multiplicativo
+		pbMulti = new PaneButton("<html><body>Congruencial<br>Multiplicativo</body></html>", "views/multi.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbMulti.setBounds(601, 424, 155, 180);
+		mainPanel.add(pbMulti);
+		
+		//congruencial mixto
+		pbMixto = new PaneButton("Congruencial Mixto", "views/mixto.png", new Color(255, 234, 0), new Color(66, 66, 66));
+		pbMixto.setBounds(800, 424, 155, 180);
+		mainPanel.add(pbMixto);
+		ad.pnHeader.btnBack.addActionListener(this);
+		
+		
+		//second 
+		sm.pnHeader.btnBack.addActionListener(this);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == pbColas.btn) {
+		if(e.getSource() == pnHeader.btnNext) {
+			sm.setVisible(true);
+			this.setVisible(false);
+		}else if(e.getSource() == sm.pnHeader.btnBack) {
+			this.setVisible(true);
+			sm.setVisible(false);
+		}else if(e.getSource() == pbColas.btn) {
 			c.setVisible(true);
 			this.setVisible(false);
 		}else if(e.getSource() == c.pnHeader.btnBack) {
@@ -142,7 +167,7 @@ public class MainMenu extends JFrame implements ActionListener{
 			ad.setVisible(false);
 		}else if(e.getSource() == pbAditivo.btn) {
 			ad.setVisible(true);
-			this.setVisible(false);
+			this.setVisible(false);			
 		}
 		
 	}

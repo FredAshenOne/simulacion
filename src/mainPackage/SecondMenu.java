@@ -3,21 +3,22 @@ package mainPackage;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class Aditivo extends JFrame {
-
+public class SecondMenu extends JFrame implements ActionListener{
 	Style s = new Style();
-	MdHeader pnHeader;
-	
-	
+	Distribucion dis = new Distribucion(); 
 	private JPanel contentPane;
+	MdHeader pnHeader;
+	PaneButton pbDistribucion;
 	
-	public Aditivo() {
+	public SecondMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 999, 677);
 		contentPane = new JPanel();
@@ -35,11 +36,29 @@ public class Aditivo extends JFrame {
 		pnHeader = new MdHeader(s.yell,s.black); 
 		pnHeader.setBounds(0, 0, 992, 104);
 		pnHeader.btnNext.setVisible(false);
-		pnHeader.lblTitle.setText("Congruencial Aditivo");
+		
+		pnHeader.lblTitle.setText("Simulación");
 		pnHeader.lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		pnHeader.lblTitle.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 30));
 		mainPanel.add(pnHeader);
 		//Opciones Menus
+		
+		pbDistribucion = new PaneButton("Distribucion","views/distribucion.png",s.yell,s.black);
+		pbDistribucion.setBounds(23, 203, 155, 180);
+		mainPanel.add(pbDistribucion);
+		pbDistribucion.btn.addActionListener(this);
+		dis.pnHeader.btnBack.addActionListener(this);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == pbDistribucion.btn) {
+			dis.setVisible(true);
+			this.setVisible(false);
+		}else if(e.getSource() == dis.pnHeader.btnBack) {
+			this.setVisible(true);
+			dis.setVisible(false);
+		}
+		
+	}
 }
