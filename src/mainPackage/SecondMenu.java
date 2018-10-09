@@ -14,9 +14,11 @@ import javax.swing.border.EmptyBorder;
 public class SecondMenu extends JFrame implements ActionListener{
 	Style s = new Style();
 	Distribucion dis = new Distribucion(); 
+	Varianza var = new Varianza();
 	private JPanel contentPane;
 	MdHeader pnHeader;
-	PaneButton pbDistribucion;
+	PaneButton pbDistribucion,pbProbabilidad,pbBinomial,pbVarianza;
+	
 	
 	public SecondMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +43,7 @@ public class SecondMenu extends JFrame implements ActionListener{
 		pnHeader.lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		pnHeader.lblTitle.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 30));
 		mainPanel.add(pnHeader);
+		
 		//Opciones Menus
 		
 		pbDistribucion = new PaneButton("Distribucion","views/distribucion.png",s.yell,s.black);
@@ -48,6 +51,27 @@ public class SecondMenu extends JFrame implements ActionListener{
 		mainPanel.add(pbDistribucion);
 		pbDistribucion.btn.addActionListener(this);
 		dis.pnHeader.btnBack.addActionListener(this);
+		
+		pbVarianza= new PaneButton("Varianza","views/varianza.png",s.yell,s.black);
+		pbVarianza.setBounds(213, 203, 155, 180);
+		mainPanel.add(pbVarianza);
+		pbVarianza.btn.addActionListener(this);
+		var.pnHeader.btnBack.addActionListener(this);
+
+		pbBinomial= new PaneButton("Binomial","views/binomial.png",s.yell,s.black);
+		pbBinomial.setBounds(408, 203, 155, 180);
+		mainPanel.add(pbBinomial);
+		pbBinomial.btn.addActionListener(this);
+		
+		
+		pbProbabilidad= new PaneButton("Probabilidad","views/probabilidad.png",s.yell,s.black);
+		pbProbabilidad.setBounds(601, 203, 155, 180);
+		mainPanel.add(pbProbabilidad);
+		pbProbabilidad.btn.addActionListener(this);
+		
+		
+		
+		
 	}
 
 	@Override
@@ -58,6 +82,12 @@ public class SecondMenu extends JFrame implements ActionListener{
 		}else if(e.getSource() == dis.pnHeader.btnBack) {
 			this.setVisible(true);
 			dis.setVisible(false);
+		}else if(e.getSource() == pbVarianza.btn) {
+			var.setVisible(true);
+			this.setVisible(false);
+		}else if(e.getSource() == var.pnHeader.btnBack) {
+			this.setVisible(true);
+			var.setVisible(false);
 		}
 		
 	}
